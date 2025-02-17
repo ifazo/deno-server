@@ -22,6 +22,8 @@ try {
 }
 
 const db = client.db(DB_NAME);
-const products = db.collection("products");
 
-export { db, products };
+const products = db.collection("products");
+const categories = db.collection("categories");
+
+export { db, products, categories };
