@@ -1,10 +1,10 @@
 import { MongoClient } from "npm:mongodb@6.13.0";
-import { config } from "https://deno.land/x/dotenv/mod.ts";
+import { load } from "@std/dotenv";
 
-const env = config();
+await load({ export: true });
 
-const MONGODB_URI = env.MONGODB_URI;
-const DB_NAME = env.DB_NAME;
+const MONGODB_URI = Deno.env.get("MONGODB_URI");
+const DB_NAME = Deno.env.get("DB_NAME");
 
 if (!MONGODB_URI) {
   console.error("MONGODB_URI is not set");
@@ -23,7 +23,8 @@ try {
 
 const db = client.db(DB_NAME);
 
-const products = db.collection("products");
+const users = db.collection("users");
 const categories = db.collection("categories");
+const products = db.collection("products");
 
-export { db, products, categories };
+export { db, users, products, categories };
