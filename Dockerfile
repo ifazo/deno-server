@@ -8,10 +8,10 @@ WORKDIR /app
 COPY . .
 
 # Step 4: Cache Deno dependencies (if any)
-RUN deno cache --unstable src/server.ts
+RUN deno cache --unstable src/index.ts
 
 # Step 5: Expose the port your Deno app will run on (default is 8000)
 EXPOSE 8000
 
 # Step 6: Run the app with necessary permissions
-CMD ["deno", "run", "--unstable", "--allow-net", "--allow-env", "--allow-read", "--allow-write", "src/server.ts"]
+CMD ["deno", "run", "--unstable", "--allow-net", "--allow-env", "--allow-read", "--allow-write", "src/index.ts"]

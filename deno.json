@@ -1,8 +1,8 @@
 {
   "tasks": {
     "test": "deno test --allow-read --allow-write --allow-net --allow-env --allow-sys src/test.ts",
-    "dev": "deno run --watch --allow-read --allow-write --allow-net --allow-env --allow-sys src/server.ts",
-    "start": "deno run --allow-read --allow-write --allow-net --allow-env --allow-sys src/server.ts"
+    "dev": "deno run --watch --allow-read --allow-write --allow-net --allow-env --allow-sys src/index.ts",
+    "start": "deno run --allow-read --allow-write --allow-net --allow-env --allow-sys src/index.ts"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
