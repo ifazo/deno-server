@@ -10,7 +10,7 @@ export function mainRouter(req: Request): Promise<Response> {
     return Promise.resolve(new Response("Welcome to Deno Server!"));
   } 
   if (req.method === "GET" && path === "/api") {
-    return Promise.resolve(new Response("Server API is running successfully!"));
+    return Promise.resolve(new Response("Deno Server API is running successfully!"));
   }
 
   return userRoutes(req) || categoryRoutes(req) || productRoutes(req) || Promise.resolve(new Response("Not Found", { status: 404 }));

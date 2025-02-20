@@ -7,11 +7,11 @@ WORKDIR /app
 # Install necessary packages
 RUN apt-get update && apt-get install -y supervisor redis-server
 
-# Copy project files into the container
+# Copy the project files into the container
 COPY . .
 
-# Cache Deno dependencies
-RUN deno cache --unstable deps.ts
+# Cache dependencies using the entry file
+RUN deno cache --unstable src/index.ts
 
 # Copy the supervisord configuration file
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf

@@ -1,7 +1,5 @@
 import { mainRouter } from "./routes/index.ts";
 
-const PORT = 3000;
-
-console.log(`Deno server running at http://localhost:${PORT}`);
+const PORT = 8000;
 
 Deno.serve({ port: PORT }, mainRouter);
