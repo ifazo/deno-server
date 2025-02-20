@@ -1,17 +1,23 @@
-# Step 1: Use a Debian-based Deno image (not Alpine)
+# Use the official Deno image
 FROM denoland/deno:2.0.0
 
-# Step 2: Set the working directory inside the container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Step 3: Copy the rest of the project into the container
+# Install necessary packages
+RUN apt-get update && apt-get install -y supervisor redis-server
+
+# Copy project files into the container
 COPY . .
 
-# Step 4: Cache Deno dependencies (if any)
-RUN deno cache --unstable src/index.ts
+# Cache Deno dependencies
+RUN deno cache --unstable deps.ts
 
-# Step 5: Expose the port your Deno app will run on (default is 8000)
-EXPOSE 8000
+# Copy the supervisord configuration file
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Step 6: Run the app with necessary permissions
-CMD ["deno", "run", "--unstable", "--allow-net", "--allow-env", "--allow-read", "--allow-write", "src/index.ts"]
+# Expose the necessary ports
+EXPOSE 8000 6379
+
+# Set Supervisor as the main process
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
